@@ -41,8 +41,25 @@ Kafka
 : order-service order itme -> catalog-service update item quantity
 
 Kafka connect
-- source : order-serivce 
+- producer : order-serivce 
 - sink : MariaDB
+{
+    "name":"my-order-sink-connect",
+    "config":{
+        "connector.class":"io.confluent.connect.jdbc.JdbcSinkConnector",
+        "connection.url":"jdbc:mysql://localhost:3307/mydb",
+        "connection.user":"root",
+        "connection.password":"test1234",
+        "auto.create":"true",
+        "auto.evolve":"true",
+        "delete.enabled":"false",
+        "tasks.max":"1",
+        "topics":"orders"
+    }
+}
+
+
+
 
 Distributed Tracing
 - Spring Cloud Sleuth
